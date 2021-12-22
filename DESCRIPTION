@@ -1,0 +1,11 @@
+Package: VVORLib
+Type: Package
+Title: This Package provides a basic Library for the API of the Verkehrsverbund Oberelbe
+Version: 0.1.0
+Author: Nicolas Reuter
+Maintainer: Nicolas Reuter <nicolas@fphst.de>
+Description: This Package provides a basic Library for the API of the Verkehrsverbund Oberelbe
+    It provides basic functions.
+License: The MIT License
+Encoding: UTF-8
+LazyData: true
