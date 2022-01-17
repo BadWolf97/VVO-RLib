@@ -6,6 +6,15 @@ Author: Nicolas Reuter
 Maintainer: Nicolas Reuter <nicolas@fphst.de>
 Description: This Package provides a basic Library for the API of the Verkehrsverbund Oberelbe
     It provides basic functions.
-License: The MIT License
+License: MIT
 Encoding: UTF-8
 LazyData: true
+Imports:
+  jsonlite,
+  httr,
+  GGally, 
+  dplyr,
+  purrr,
+  stringr,
+  anytime
+RoxygenNote: 7.1.2
