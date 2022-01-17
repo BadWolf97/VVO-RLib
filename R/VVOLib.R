@@ -1,3 +1,12 @@
+#Helper-Method for adding column if not exist
+#' @source https://stackoverflow.com/a/45858044
+addcolumnifnotexist <- function(data, cname) {
+  add <-cname[!cname%in%names(data)]
+
+  if(length(add)!=0) data[add] <- NA
+  data
+}
+
 #Helper-Method for getting results via the WebAPI
 #' @importFrom httr POST add_headers content
 #' @importFrom jsonlite toJSON fromJSON
@@ -30,12 +39,24 @@ vvo_handleDate <- function(date) {
   require(anytime)
   require(GGally)
   require(stringr)
-  return (anytime(as.numeric(str_replace(date, fixed("/Date("), "") %>% str_replace(fixed("-0000)/"), "")) / 1000))
+  ret <- date %>%
+    str_replace(fixed("/Date("), "") %>%
+    str_replace(fixed("-0000)/"), "") %>%
+    as.numeric %>%
+    `/`(1000) %>%
+    anytime()
+
+  return (ret)
 }
 
 #Helper-Method for getting the API-Date from an R-Date
 vvo_toDate <- function(date) {
-  return (paste0("/Date(", round(as.numeric(date)) * 1000 , "-0000)/"))
+  return (paste0("/Date(", date %>%
+                   as.numeric() %>%
+                   round() %>%
+                   `*`(1000) %>%
+                   format(scientific = FALSE),  #To Prevent getting "\Date(1.642434e+12-0000)/"
+                 "-0000)/"))
 }
 
 #' @title Helper-Method to beautify Platform-Description
@@ -100,11 +121,10 @@ vvo_getDeps <- function(stopid, limit = 10){
   require(dplyr)
   result <- vvo_get("dm", list(stopid = stopid, limit = limit, stopsOnly = TRUE))
   df_result = as_tibble(result$Departures) %>%
-    try(add_column(RealTime = NA)) %>%
+    addcolumnifnotexist("RealTime") %>%
     mutate(
       RealTime = vvo_handleDate(RealTime),
-      ScheduledTime = vvo_handleDate(ScheduledTime),
-      .after = "Mot"
+      ScheduledTime = vvo_handleDate(ScheduledTime)
     )
   return(df_result)
 }
@@ -122,11 +142,10 @@ vvo_getTrip <- function(stopid, tripid, time = Sys.time()) {
   require(dplyr)
   result <- vvo_get("dm/trip", list(tripid = tripid, stopid = stopid, time = vvo_toDate(time)))
   df_result = as_tibble(result$Stops) %>%
-    try(add_column(RealTime = NA)) %>%
+    addcolumnifnotexist("RealTime") %>%
     mutate(
       RealTime = vvo_handleDate(RealTime),
-      Time = vvo_handleDate(Time),
-      .after = "State"
+      Time = vvo_handleDate(Time)
     )
   return(df_result)
 }
