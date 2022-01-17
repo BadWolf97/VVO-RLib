@@ -15,3 +15,14 @@ Tibble with all Lines at this stop.
 \description{
 Get Lines at Stop by StopID
 }
+\examples{
+> vvo_getLinesAtStop(33000076)
+# A tibble: 5 x 5
+Name  Mot     Changes   Directions   Diva$Number $Network
+<chr> <chr>   <list>    <list>       <chr>       <chr>
+1 4     Tram    <chr [2]> <df [2 x 2]> 11004       voe
+2 6     Tram    <NULL>    <df [2 x 2]> 11006       voe
+3 10    Tram    <NULL>    <df [2 x 2]> 11010       voe
+4 12    Tram    <NULL>    <df [2 x 2]> 11012       voe
+5 86    CityBus <NULL>    <df [1 x 2]> 21086       voe
+}

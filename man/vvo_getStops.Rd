@@ -15,3 +15,10 @@ Tibble with Informations about the Stop
 \description{
 Get Stops in VVO based on a query
 }
+\examples{
+> vvo_getStops("LAI")
+# A tibble: 1 x 5
+ID City    Station          GK_Right   GK_Up
+<int> <chr>   <chr>               <int>   <int>
+1 33000076 Dresden Laibacher Straße  5655656 4628750
+}
