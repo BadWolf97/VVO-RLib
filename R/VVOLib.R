@@ -122,6 +122,7 @@ vvo_getDeps <- function(stopid, limit = 10){
   result <- vvo_get("dm", list(stopid = stopid, limit = limit, stopsOnly = TRUE))
   df_result = as_tibble(result$Departures) %>%
     addcolumnifnotexist("RealTime") %>%
+    addcolumnifnotexist("ScheduledTime") %>%
     mutate(
       RealTime = vvo_handleDate(RealTime),
       ScheduledTime = vvo_handleDate(ScheduledTime)
@@ -143,6 +144,7 @@ vvo_getTrip <- function(stopid, tripid, time = Sys.time()) {
   result <- vvo_get("dm/trip", list(tripid = tripid, stopid = stopid, time = vvo_toDate(time)))
   df_result = as_tibble(result$Stops) %>%
     addcolumnifnotexist("RealTime") %>%
+    addcolumnifnotexist("Time") %>%
     mutate(
       RealTime = vvo_handleDate(RealTime),
       Time = vvo_handleDate(Time)
