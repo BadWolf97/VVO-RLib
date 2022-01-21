@@ -26,9 +26,13 @@ vvo_get <- function(endpoint, body) {
                           "charset"="utf-8")
                       )
   )
+  json_result <- fromJSON(content(post_result, as = "text"))
+  if (json_result$Status$Code == "Ok") {
+    return (json_result)
+  }
+  stop(json_result$Status)
   # Return the Request
   #print(paste("Response:", content(post_result, as = "text")))
-  return (fromJSON(content(post_result, as = "text")))
 }
 
 #Helper-Method for getting a Date from the stuff the API sends
