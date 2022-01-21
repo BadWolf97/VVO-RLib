@@ -15,8 +15,6 @@ vvo_get <- function(endpoint, body) {
   require(jsonlite)
   #Format Request to a JSON
   request_body_json <- toJSON(body, auto_unbox = TRUE)
-  #print(paste("RequestBody:", request_body_json))
-  #print(paste("Using Endpoint", paste("https://webapi.vvo-online.de", endpoint, sep = "/"), "..."))
   # Do the Request
   post_result <- POST(paste("https://webapi.vvo-online.de", endpoint, sep = "/"),
                       body = request_body_json,
@@ -30,9 +28,11 @@ vvo_get <- function(endpoint, body) {
   if (json_result$Status$Code == "Ok") {
     return (json_result)
   }
+  # Error-Handling
+  print(paste("Using Endpoint", paste("https://webapi.vvo-online.de", endpoint, sep = "/"), "..."))
+  print(paste("RequestBody:", request_body_json))
+  print(paste("Response:", content(post_result, as = "text")))
   stop(json_result$Status)
-  # Return the Request
-  #print(paste("Response:", content(post_result, as = "text")))
 }
 
 #Helper-Method for getting a Date from the stuff the API sends
