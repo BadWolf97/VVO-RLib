@@ -222,4 +222,25 @@ vvo_getAllStops <- function() {
       #MOTs = unique(Lines$Vehicle),
     )
   return(df_result)
+
+}#' @title Get all Stops (daily updated)
+#' @return Tibble with all Stops in VVO, fetched from an open_data-JSON. There might be duplicates.
+#' @source https://www.vvo-online.de/open_data/VVO_STOPS.JSON
+#' @export
+#' @importFrom GGally %>%
+#' @importFrom dplyr as_tibble mutate
+#' @importFrom jsonlite fromJSON
+vvo_getPuR <- function() {
+  require(GGally)
+  require(dplyr)
+  require(jsonlite)
+  df_result = fromJSON("https://www.vvo-online.de/open_data/PuR.JSON") %>%
+    as_tibble() %>%
+    mutate(
+      lon = as.numeric(lon),
+      lat = as.numeric(lat),
+
+      #MOTs = unique(Lines$Vehicle),
+    )
+  return(df_result)
 }
