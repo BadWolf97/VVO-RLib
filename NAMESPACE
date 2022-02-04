@@ -3,6 +3,7 @@
 export(vvo_getAllStops)
 export(vvo_getDeps)
 export(vvo_getLinesAtStop)
+export(vvo_getPuR)
 export(vvo_getRouteChanges)
 export(vvo_getStops)
 export(vvo_getTrip)

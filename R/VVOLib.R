@@ -81,11 +81,7 @@ vvo_transformPlatformType <- function(Platform) {
 #' @title Get Stops in VVO based on a query
 #' @param query Query to search with. Supports Abbrevations by DVB
 #' @return Tibble with Informations about the Stop
-#' @examples > vvo_getStops("LAI")
-#' # A tibble: 1 x 5
-#' ID City    Station          GK_Right   GK_Up
-#' <int> <chr>   <chr>               <int>   <int>
-#' 1 33000076 Dresden Laibacher Straße  5655656 4628750
+#' @example vvo_getStops("LAI")
 #' @export
 #' @importFrom GGally %>%
 #' @importFrom dplyr as_tibble
@@ -110,13 +106,7 @@ vvo_getStops <- function(query) {
 #' @param stopid StopID (can be obtained by vvo_getStops)
 #' @param limit Resultcount. Default 10, Maximum (due to API-Restrictions) 50
 #' @return Tibble with Informations about the Departures
-#' @examples > vvo_getDeps(33000076,2)
-#' # A tibble: 2 x 12
-#' Id        DlId    LineName Direction  Platform$Name $Type Mot   RealTime            ScheduledTime       State RouteChanges
-#' <chr>     <chr>   <chr>    <chr>      <chr>         <chr> <chr> <dttm>              <dttm>              <chr> <list>
-#' 1 voe:1100~ de:vvo~ 6        Niedersed~ 2             Plat~ Tram  2022-01-17 13:05:00 2022-01-17 13:04:00 Dela~ <list [0]>
-#' 2 voe:1100~ de:vvo~ 6        Wölfnitz   1             Plat~ Tram  2022-01-17 13:10:00 2022-01-17 13:10:00 InTi~ <list [0]>
-#' # ... with 2 more variables: Diva <df[,2]>, CancelReasons <list>
+#' @example vvo_getDeps(33000076,2)
 #' @export
 #' @importFrom GGally %>%
 #' @importFrom dplyr as_tibble mutate
@@ -184,15 +174,7 @@ vvo_getRouteChanges <- function() {
 #' @title Get Lines at Stop by StopID
 #' @param stopid StopID (can be obtained by vvo_getStops)
 #' @return Tibble with all Lines at this stop.
-#' @examples > vvo_getLinesAtStop(33000076)
-#' # A tibble: 5 x 5
-#' Name  Mot     Changes   Directions   Diva$Number $Network
-#' <chr> <chr>   <list>    <list>       <chr>       <chr>
-#' 1 4     Tram    <chr [2]> <df [2 x 2]> 11004       voe
-#' 2 6     Tram    <NULL>    <df [2 x 2]> 11006       voe
-#' 3 10    Tram    <NULL>    <df [2 x 2]> 11010       voe
-#' 4 12    Tram    <NULL>    <df [2 x 2]> 11012       voe
-#' 5 86    CityBus <NULL>    <df [1 x 2]> 21086       voe
+#' @example vvo_getLinesAtStop(33000076)
 #' @export
 #' @importFrom dplyr as_tibble
 vvo_getLinesAtStop <- function(stopid) {
@@ -225,9 +207,9 @@ vvo_getAllStops <- function() {
 
 }
 
-#' @title Get all Stops (daily updated)
-#' @return Tibble with all Stops in VVO, fetched from an open_data-JSON. There might be duplicates.
-#' @source https://www.vvo-online.de/open_data/VVO_STOPS.JSON
+#' @title Get Park & Ride Places in VVO
+#' @return Tibble with all P&R Places in VVO, fetched from an open_data-JSON. There might be duplicates.
+#' @source http://www.vvo-online.de/open_data/PuR.JSON
 #' @export
 #' @importFrom GGally %>%
 #' @importFrom dplyr as_tibble mutate

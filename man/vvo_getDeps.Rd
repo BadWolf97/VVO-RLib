@@ -17,12 +17,3 @@ Tibble with Informations about the Departures
 \description{
 Get Departures by StopID
 }
-\examples{
-> vvo_getDeps(33000076,2)
-# A tibble: 2 x 12
-Id        DlId    LineName Direction  Platform$Name $Type Mot   RealTime            ScheduledTime       State RouteChanges
-<chr>     <chr>   <chr>    <chr>      <chr>         <chr> <chr> <dttm>              <dttm>              <chr> <list>
-1 voe:1100~ de:vvo~ 6        Niedersed~ 2             Plat~ Tram  2022-01-17 13:05:00 2022-01-17 13:04:00 Dela~ <list [0]>
-2 voe:1100~ de:vvo~ 6        Wölfnitz   1             Plat~ Tram  2022-01-17 13:10:00 2022-01-17 13:10:00 InTi~ <list [0]>
-# ... with 2 more variables: Diva <df[,2]>, CancelReasons <list>
-}
