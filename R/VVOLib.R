@@ -223,7 +223,9 @@ vvo_getAllStops <- function() {
     )
   return(df_result)
 
-}#' @title Get all Stops (daily updated)
+}
+
+#' @title Get all Stops (daily updated)
 #' @return Tibble with all Stops in VVO, fetched from an open_data-JSON. There might be duplicates.
 #' @source https://www.vvo-online.de/open_data/VVO_STOPS.JSON
 #' @export
