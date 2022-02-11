@@ -191,9 +191,11 @@ vvo_getLinesAtStop <- function(stopid) {
 #' @importFrom GGally %>%
 #' @importFrom dplyr as_tibble mutate
 #' @importFrom jsonlite fromJSON
+#' @importFrom httr GET
 vvo_getAllStops <- function() {
   require(GGally)
   require(dplyr)
+  require(httr)
   require(jsonlite)
   df_result = GET("https://www.vvo-online.de/open_data/VVO_STOPS.JSON") %>%
     content(as = "text") %>%
@@ -216,9 +218,11 @@ vvo_getAllStops <- function() {
 #' @importFrom GGally %>%
 #' @importFrom dplyr as_tibble mutate
 #' @importFrom jsonlite fromJSON
+#' @importFrom httr GET
 vvo_getPuR <- function() {
   require(GGally)
   require(dplyr)
+  require(httr)
   require(jsonlite)
   df_result = GET("https://www.vvo-online.de/open_data/PuR.JSON") %>%
     content(as = "text") %>%
