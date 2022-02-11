@@ -195,7 +195,9 @@ vvo_getAllStops <- function() {
   require(GGally)
   require(dplyr)
   require(jsonlite)
-  df_result = fromJSON("https://www.vvo-online.de/open_data/VVO_STOPS.JSON") %>%
+  df_result = GET("https://www.vvo-online.de/open_data/VVO_STOPS.JSON") %>%
+    content(as = "text") %>%
+    fromJSON() %>%
     as_tibble() %>%
     mutate(
       x = as.numeric(x),
@@ -218,13 +220,13 @@ vvo_getPuR <- function() {
   require(GGally)
   require(dplyr)
   require(jsonlite)
-  df_result = fromJSON("https://www.vvo-online.de/open_data/PuR.JSON") %>%
+  df_result = GET("https://www.vvo-online.de/open_data/PuR.JSON") %>%
+    content(as = "text") %>%
+    fromJSON() %>%
     as_tibble() %>%
     mutate(
       lon = as.numeric(lon),
       lat = as.numeric(lat),
-
-      #MOTs = unique(Lines$Vehicle),
     )
   return(df_result)
 }
