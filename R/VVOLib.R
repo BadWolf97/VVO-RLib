@@ -19,10 +19,12 @@ vvo_get <- function(endpoint, body) {
   # Do the Request
   post_result <- POST(paste("https://webapi.vvo-online.de", endpoint, sep = "/"),
                       body = request_body_json,
+                      accept("*/*"),
+                      content_type_json(),
                       user_agent(Sys.getenv("Override_UserAgent")),
                       add_headers(
                         .headers = c(
-                          "Content-Type"="application/json",
+                          "Accept-Encoding"="",
                           "charset"="utf-8")
                       )
   )
