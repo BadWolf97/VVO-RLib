@@ -13,11 +13,13 @@ addcolumnifnotexist <- function(data, cname) {
 vvo_get <- function(endpoint, body) {
   require(httr)
   require(jsonlite)
+
   #Format Request to a JSON
   request_body_json <- toJSON(body, auto_unbox = TRUE)
   # Do the Request
   post_result <- POST(paste("https://webapi.vvo-online.de", endpoint, sep = "/"),
                       body = request_body_json,
+                      user_agent(Sys.getenv("Override_UserAgent")),
                       add_headers(
                         .headers = c(
                           "Content-Type"="application/json",
